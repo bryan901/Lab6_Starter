@@ -17,18 +17,15 @@ class RecipeCard extends HTMLElement {
     image.alt = '';
     image.src = '';
     article.append(image);
-
     let title = document.createElement('p');
     title.className = 'title';
     let link = document.createElement('a');
     link.href = '';
     title.appendChild(link);
     article.appendChild(title);
-
     let organization = document.createElement('p');
     organization.className = 'organization';
     article.appendChild(organization);
-
     let rating = document.createElement('div');
     rating.className = 'rating';
     let rat = document.createElement('span');
@@ -40,16 +37,15 @@ class RecipeCard extends HTMLElement {
     let responses = document.createElement('span');
     rating.appendChild(responses);
     article.appendChild(rating);
-
     let time = document.createElement('time');
     article.appendChild(time);
-
     let ingredients = document.createElement('p');
     ingredients.className = 'ingredients';
+
     // A3. TODO - Create a style element - This will hold all of the styles for the Web Component
     let style = document.createElement('style');
     // A4. TODO - Insert all of the styles from cardTemplate.html into the <style> element you just made
-    style.innerHTML = `* {
+    style.innerHTML = "* {
       font-family: sans-serif;
       margin: 0;
       padding: 0;
@@ -123,10 +119,11 @@ class RecipeCard extends HTMLElement {
     time {
       color: #70757A;
       font-size: 12px;
-    }`;
+    }";
     // A5. TODO - Append the <style> and <article> elements to the Shadow DOM
-    shadowOpen.append(style);
     shadowOpen.append(article);
+    shadowOpen.append(style);
+
   }
 
   /**
@@ -163,18 +160,16 @@ class RecipeCard extends HTMLElement {
     let image = elem.getElementsByTagName('img')[0];
     image.alt = data.imgAlt;
     image.src = data.imgSrc;
-
     let title = elem.getElementsByClassName('title')[0];
     let titleLink = title.getElementsByTagName('a')[0];
     title.href = data.titleLnk;
     title.innerHTML = data.titleTxt;
-
     elem.getElementsByClassName('organization')[0].innerHTML = data.organization;
-
     let rating = elem.getElementsByClassName('rating')[0];
     rating.getElementsByTagName('span')[0].innerHTML = data.rating;
     rating.getElementsByTagName('span')[1].innerHTML = data.numRatings;
     let recipeRatingIMG = rating.getElementsByTagName('img')[0];
+
     switch(data.rating){
       case 0:
         recipeRatingIMG.src = "/assets/images/icons/0-star.svg";
@@ -201,11 +196,14 @@ class RecipeCard extends HTMLElement {
         recipeRatingIMG.alt = "5 stars";
         break;
     }
+
     elem.getElementsByTagName('time')[0].innerHTML = data.lengthTime;
+
     elem.getElementsByClassName('ingredients').innerHTML = data.ingredients;
   }
 }
 
 // A8. TODO - Define the Class as a customElement so that you can create
 //           'recipe-card' elements
+
 customElements.define('recipe-card', RecipeCard);
